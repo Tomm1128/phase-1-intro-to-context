@@ -33,3 +33,16 @@ const createTimeInEvent = (employeeRecord, timeIn) => {
   employeeRecord.timeInEvents.push(timeInObj)
   return employeeRecord
 }
+
+const createTimeOutEvent = (employeeRecord, timeOut) => {
+  const timeOutArray = timeOut.split(" ")
+  const [inputDate, inputTime] = timeOutArray
+  const timeOutObj = {
+    type: "TimeOut",
+    date: inputDate,
+    hour: parseInt(inputTime)
+  }
+  
+  employeeRecord.timeOutEvents.push(timeOutObj)
+  return employeeRecord
+}
