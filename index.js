@@ -47,6 +47,44 @@ const createTimeOutEvent = (employeeRecord, timeOut) => {
   return employeeRecord
 }
 
+const hoursWorkedOnDate = (employeeRecord, lookUpDate) => {
+  const timeInArray = employeeRecord.timeInEvents
+  const timeOutArray = employeeRecord.timeOutEvents
+  let timeInTime = 0
+  let timeOutTime = 0
+
+  timeInArray.forEach(element => {
+    if (element.date === lookUpDate){
+      timeInTime += element.hour
+    }
+  })
+  timeOutArray.forEach(element => {
+    if (element.date === lookUpDate){
+      timeOutTime += element.hour
+    }
+  })
+
+  return (timeOutTime - timeInTime) / 100
+}
+
+const wagesEarnedOnDate = (employeeRecord, lookUpDate) => {
+  let hoursWorked = hoursWorkedOnDate(employeeRecord, lookUpDate)
+  let pay = employeeRecord.payPerHour
+
+  return hoursWorked * pay
+}
+
+const allWagesFor = (employeeRecord) => {
+  const timeInHours = employeeRecord.timeInEvents.map(element => element.hour)
+  const timeOutHours = employeeRecord.timeOutEvents.map(element => element.hour)
+  const totalInHours = timeInHours.reduce((accumulator, currentValue) => accumulator + currentValue)
+  const totalOutHours = timeOutHours.reduce((accumulator, currentValue) => accumulator + currentValue)
+  let totalWorkingHours = (totalOutHours - totalInHours) / 100
+  let pay = employeeRecord.payPerHour
+
+   return totalWorkingHours * pay
+}
+
 const testRecord = {
   firstName: 'Julius',
   familyName: 'Caesar',
@@ -59,33 +97,3 @@ const testRecord = {
 const testTime = "0044-03-15"
 
 
-const hoursWorkedOnDate = (employeeRecord, lookUpDate) => {
-  const timeInArray = employeeRecord.timeInEvents
-  const timeOutArray = employeeRecord.timeOutEvents
-  let timeInTime = 0
-  let timeOutTime = 0
-  timeInArray.forEach(element => {
-    if (element.date === lookUpDate){
-      timeInTime += element.hour
-    }
-  })
-  timeOutArray.forEach(element => {
-    if (element.date === lookUpDate){
-      timeOutTime += element.hour
-    }
-  })
-  return (timeOutTime - timeInTime) / 100
-}
-
-const wagesEarnedOnDate = (employeeRecord, lookUpDate) => {
-  let hoursWorked = hoursWorkedOnDate(employeeRecord, lookUpDate)
-  let pay = employeeRecord.payPerHour
-
-  return hoursWorked * pay
-}
-
-const allWagesFor = (employeeRecord) => {
-
-}
-
-allWagesFor(testRecord)
