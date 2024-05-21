@@ -85,15 +85,8 @@ const allWagesFor = (employeeRecord) => {
    return totalWorkingHours * pay
 }
 
-const testRecord = {
-  firstName: 'Julius',
-  familyName: 'Caesar',
-  title: 'General',
-  payPerHour: 1000,
-  timeInEvents: [ { type: 'TimeIn', date: '0044-03-15', hour: 900 }, { type: 'TimeIn', date: '0044-03-15', hour: 1200 } ],
-  timeOutEvents: [ { type: 'TimeOut', date: '0044-03-15', hour: 1100 }, { type: 'TimeOut', date: '0044-03-15', hour: 1500 }  ]
+const calculatePayroll = (employeeRecords) => {
+  let totalWages = 0
+  employeeRecords.forEach((employee) => totalWages = totalWages + allWagesFor(employee))
+  return totalWages
 }
-
-const testTime = "0044-03-15"
-
-
