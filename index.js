@@ -13,6 +13,10 @@ const createEmployeeRecord = (employeeArray) => {
   return employeeRecord
 }
 
-const createEmployeeRecords = () => {
-  
+const createEmployeeRecords = (arrayOfEmployees) => {
+  let employeesRecords = []
+  arrayOfEmployees.map((item) => {
+    employeesRecords.push(createEmployeeRecord(item))
+  })
+  return employeesRecords
 }
