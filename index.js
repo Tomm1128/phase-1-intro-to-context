@@ -20,3 +20,16 @@ const createEmployeeRecords = (arrayOfEmployees) => {
   })
   return employeesRecords
 }
+
+const createTimeInEvent = (employeeRecord, timeIn) => {
+  const timeInArray = timeIn.split(" ")
+  const [inputDate, inputTime] = timeInArray
+  const timeInObj = {
+    type: "TimeIn",
+    date: inputDate,
+    hour: parseInt(inputTime)
+  }
+  
+  employeeRecord.timeInEvents.push(timeInObj)
+  return employeeRecord
+}
